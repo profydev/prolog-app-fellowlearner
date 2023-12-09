@@ -29,4 +29,12 @@
 .icon {
   width: space.$s6;
   margin-right: space.$s3;
+
+  /* .rotated-icon {
+    transform: rotate(180deg);
+  } */
+}
+
+.rotated-icon {
+  transform: rotate(180deg);
 }
