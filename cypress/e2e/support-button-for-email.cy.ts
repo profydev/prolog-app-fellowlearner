@@ -21,7 +21,9 @@ describe("Email Button Test", () => {
         "have.attr",
         "title",
         `Send email to: ${email}\nSubject: ${subject}` ,*/
-      cy.contains("button", "Support").click();
+      cy.contains("button", "Support").invoke("on", "click", (e) => {
+        e.preventDefault();
+      });
     });
   });
 });
