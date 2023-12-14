@@ -51,6 +51,8 @@
 .logo {
   width: 7.375rem;
 
+  // reported logo mobile-view scaling issue not reproduced.
+  // current setting work well.
   @media (min-width: breakpoint.$desktop) {
     margin: space.$s0 space.$s4;
   }
