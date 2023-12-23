@@ -22,11 +22,10 @@ export function SidebarNavigation() {
 
   const isViewMobile = () => {
     if (typeof window !== "undefined") {
-      const windowWidth = window.matchMedia("(max-width: 1024px)");
-
-      if (windowWidth.matches) {
+      const windowWidth = window.matchMedia("(min-width: 1024px)");
+      if (!windowWidth.matches) {
         return "/icons/logo-large.svg";
-      } else if (!windowWidth.matches) {
+      } else if (windowWidth.matches) {
         if (isSidebarCollapsed) {
           return "/icons/logo-small.svg";
         } else {
@@ -35,10 +34,6 @@ export function SidebarNavigation() {
       }
     }
   };
-
-  if (typeof window !== "undefined") {
-    window.addEventListener("resize", isViewMobile);
-  }
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleEmailClick = () => {
