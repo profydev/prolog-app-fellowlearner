@@ -19,6 +19,27 @@ const menuItems = [
 export function SidebarNavigation() {
   const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
+
+  const isViewMobile = () => {
+    if (typeof window !== "undefined") {
+      const windowWidth = window.matchMedia("(max-width: 1024px)");
+
+      if (windowWidth.matches) {
+        return "/icons/logo-large.svg";
+      } else if (!windowWidth.matches) {
+        if (isSidebarCollapsed) {
+          return "/icons/logo-small.svg";
+        } else {
+          return "/icons/logo-large.svg";
+        }
+      }
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("resize", isViewMobile);
+  }
+
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <div
@@ -35,15 +56,7 @@ export function SidebarNavigation() {
       >
         <header className={styles.header}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={
-              isSidebarCollapsed
-                ? "/icons/logo-small.svg"
-                : "/icons/logo-large.svg"
-            }
-            alt="logo"
-            className={styles.logo}
-          />
+          <img src={isViewMobile()} alt="logo" className={styles.logo} />
           <Button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className={styles.menuButton}
