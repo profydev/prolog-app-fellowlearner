@@ -41,6 +41,20 @@ export function SidebarNavigation() {
   }
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const handleEmailClick = () => {
+    const email = "support@prolog-app.com";
+    const subject = "Support Request:";
+    //const body = 'How can we help?';
+
+    if (typeof window !== "undefined") {
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
+        subject,
+      )}`;
+
+      // Open the user's default email client
+      window.location.href = mailtoLink;
+    }
+  };
   return (
     <div
       className={classNames(
@@ -96,7 +110,7 @@ export function SidebarNavigation() {
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              onClick={() => alert("Support")}
+              onClick={() => handleEmailClick()}
             />
             <MenuItemButton
               text="Collapse"
