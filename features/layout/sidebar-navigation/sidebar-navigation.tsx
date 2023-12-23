@@ -22,7 +22,7 @@ export function SidebarNavigation() {
   let hideCollapseButton = false;
 
   const isViewMobile = () => {
-    if (typeof window !== "undefined") {
+    const checkView = () => {
       const windowWidth = window.matchMedia("(min-width: 1024px)");
       if (!windowWidth.matches) {
         hideCollapseButton = true;
@@ -34,7 +34,12 @@ export function SidebarNavigation() {
           return "/icons/logo-large.svg";
         }
       }
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", checkView);
     }
+    return checkView();
   };
 
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
