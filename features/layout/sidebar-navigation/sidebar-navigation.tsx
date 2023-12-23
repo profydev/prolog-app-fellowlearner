@@ -19,11 +19,13 @@ const menuItems = [
 export function SidebarNavigation() {
   const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
+  let hideCollapseButton = false;
 
   const isViewMobile = () => {
     if (typeof window !== "undefined") {
       const windowWidth = window.matchMedia("(min-width: 1024px)");
       if (!windowWidth.matches) {
+        hideCollapseButton = true;
         return "/icons/logo-large.svg";
       } else if (windowWidth.matches) {
         if (isSidebarCollapsed) {
@@ -112,7 +114,9 @@ export function SidebarNavigation() {
               iconSrc="/icons/arrow-left.svg"
               isCollapsed={isSidebarCollapsed}
               onClick={() => toggleSidebar()}
-              className={`${isSidebarCollapsed && styles.rotatedMenuIcon}`}
+              className={`${isSidebarCollapsed && styles.rotatedMenuIcon} ${
+                hideCollapseButton && styles.collapseMenuItem
+              }`}
             />
           </ul>
         </nav>

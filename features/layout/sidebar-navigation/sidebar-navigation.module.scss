@@ -72,6 +72,14 @@
   transform: rotate(180deg);
 }
 
+.collapseMenuItem {
+  display: none;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: flex;
+  }
+}
+
 .menuOverlay {
   position: fixed;
   top: 0;
@@ -135,12 +143,4 @@
 .linkList {
   composes: list;
   flex: 1;
-}
-
-.collapseMenuItem {
-  display: none;
-
-  @media (min-width: breakpoint.$desktop) {
-    display: flex;
-  }
 }
