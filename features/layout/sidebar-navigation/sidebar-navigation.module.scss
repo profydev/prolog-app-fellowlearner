@@ -68,6 +68,10 @@
   width: space.$s10;
 }
 
+.rotatedMenuIcon {
+  transform: rotate(180deg);
+}
+
 .menuOverlay {
   position: fixed;
   top: 0;
