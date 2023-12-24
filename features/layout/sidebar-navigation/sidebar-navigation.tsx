@@ -22,26 +22,26 @@ export function SidebarNavigation() {
   let hideCollapseButton = false;
 
   const isViewMobile = () => {
-    const checkView = () => {
-      const windowWidth = window.matchMedia("(min-width: 1024px)");
-      if (!windowWidth.matches) {
-        hideCollapseButton = true;
-        return "/icons/logo-large.svg";
-      } else if (windowWidth.matches) {
-        if (isSidebarCollapsed) {
-          return "/icons/logo-small.svg";
-        } else {
-          return "/icons/logo-large.svg";
-        }
-      }
-    };
-
     if (typeof window !== "undefined") {
-      window.addEventListener("resize", checkView);
-    }
-    return checkView();
-  };
+      const windowWidth = window.matchMedia("(min-width: 1024px)");
 
+      const isViewMobil = () => {
+        if (!windowWidth.matches) {
+          hideCollapseButton = true;
+          return "/icons/logo-large.svg";
+        } else if (windowWidth.matches) {
+          if (isSidebarCollapsed) {
+            return "/icons/logo-small.svg";
+          } else {
+            return "/icons/logo-large.svg";
+          }
+        }
+      };
+
+      window.addEventListener("resize", isViewMobil);
+      return isViewMobil();
+    }
+  };
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleEmailClick = () => {
     const email = "support@prolog-app.com";
@@ -119,9 +119,8 @@ export function SidebarNavigation() {
               iconSrc="/icons/arrow-left.svg"
               isCollapsed={isSidebarCollapsed}
               onClick={() => toggleSidebar()}
-              className={`${isSidebarCollapsed && styles.rotatedMenuIcon} ${
-                hideCollapseButton && styles.collapseMenuItem
-              }`}
+              className={`${isSidebarCollapsed && styles.rotatedMenuIcon} 
+                ${hideCollapseButton && styles.collapseMenuItem}`}
             />
           </ul>
         </nav>
