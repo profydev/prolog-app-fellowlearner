@@ -19,6 +19,29 @@ const menuItems = [
 export function SidebarNavigation() {
   const router = useRouter();
   const { isSidebarCollapsed, toggleSidebar } = useContext(NavigationContext);
+  let hideCollapseButton = false;
+
+  const isViewMobile = () => {
+    if (typeof window !== "undefined") {
+      const windowWidth = window.matchMedia("(min-width: 1024px)");
+
+      const isViewMobil = () => {
+        if (!windowWidth.matches) {
+          hideCollapseButton = true;
+          return "/icons/logo-large.svg";
+        } else if (windowWidth.matches) {
+          if (isSidebarCollapsed) {
+            return "/icons/logo-small.svg";
+          } else {
+            return "/icons/logo-large.svg";
+          }
+        }
+      };
+
+      window.addEventListener("resize", isViewMobil);
+      return isViewMobil();
+    }
+  };
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const handleEmailClick = () => {
     const email = "support@prolog-app.com";
@@ -49,15 +72,7 @@ export function SidebarNavigation() {
       >
         <header className={styles.header}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={
-              isSidebarCollapsed
-                ? "/icons/logo-small.svg"
-                : "/icons/logo-large.svg"
-            }
-            alt="logo"
-            className={styles.logo}
-          />
+          <img src={isViewMobile()} alt="logo" className={styles.logo} />
           <Button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className={styles.menuButton}
@@ -104,7 +119,8 @@ export function SidebarNavigation() {
               iconSrc="/icons/arrow-left.svg"
               isCollapsed={isSidebarCollapsed}
               onClick={() => toggleSidebar()}
-              className={styles.collapseMenuItem}
+              className={`${isSidebarCollapsed && styles.rotatedMenuIcon} 
+                ${hideCollapseButton && styles.collapseMenuItem}`}
             />
           </ul>
         </nav>

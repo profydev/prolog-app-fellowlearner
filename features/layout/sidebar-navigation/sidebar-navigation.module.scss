@@ -46,13 +46,14 @@
     height: unset;
     padding: space.$s8 space.$s4 space.$s6;
   }
-}
 
-.logo {
-  width: 7.375rem;
-
-  @media (min-width: breakpoint.$desktop) {
+  .logo {
+    width: 7.375rem;
     margin: space.$s0 space.$s4;
+
+    @media (max-width: breakpoint.$desktop) {
+      margin: space.$s0 space.$s4;
+    }
   }
 }
 
@@ -65,6 +66,18 @@
 .menuIcon {
   display: block;
   width: space.$s10;
+}
+
+.rotatedMenuIcon {
+  transform: rotate(180deg);
+}
+
+.collapseMenuItem {
+  display: none;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: flex;
+  }
 }
 
 .menuOverlay {
@@ -130,12 +143,4 @@
 .linkList {
   composes: list;
   flex: 1;
-}
-
-.collapseMenuItem {
-  display: none;
-
-  @media (min-width: breakpoint.$desktop) {
-    display: flex;
-  }
 }
